@@ -16,7 +16,10 @@ public class Layer {
         String str = json.replaceAll("\\s+","");
         int objectsIndex = str.indexOf("objects");
         int endIndex = str.lastIndexOf("}");
-
+        int groupsIndex = str.indexOf("groups");
+        if(groupsIndex > 0) {
+            parseGroups(str.substring(objectsIndex + 8, endIndex - 1));
+        }
         parseObjects(str.substring(objectsIndex + 9, endIndex - 1));
     }
 
@@ -36,11 +39,28 @@ public class Layer {
         return m_ID;
     }
 
+    private void parseGroups(String groupsStr) {
+        String groupStr;
+        while (!groupsStr.isEmpty()) {
+            int separatorIndex = searchSeparator(groupsStr);
+            if (separatorIndex == -1) {
+                groupStr = groupsStr;
+            } else {
+                groupStr = groupsStr.substring(0, separatorIndex);
+            }
+            m_list.add(JSON.parseGroup(groupStr));
+            if (separatorIndex == -1) {
+                groupsStr = "";
+            } else {
+                groupsStr = groupsStr.substring(separatorIndex + 1);
+            }
+        }
+    }
+
     private void parseObjects(String objectsStr) {
+        String objectStr;
         while (!objectsStr.isEmpty()) {
             int separatorIndex = searchSeparator(objectsStr);
-            String objectStr;
-
             if (separatorIndex == -1) {
                 objectStr = objectsStr;
             } else {
