@@ -3,6 +3,9 @@ package org.ulco;
 import java.util.Vector;
 
 public class Layer {
+    private Vector<GraphicsObject> m_list;
+    private int m_ID;
+
     public Layer() {
         m_list = new Vector<GraphicsObject>();
         m_ID = ++ID.ID;
@@ -101,7 +104,4 @@ public class Layer {
         }
         return str + " } }";
     }
-
-    private Vector<GraphicsObject> m_list;
-    private int m_ID;
 }
