@@ -1,5 +1,21 @@
 package org.ulco;
 
 public class ID {
-    static public int ID = 0;
+    private int id;
+    private static ID generator;
+
+    private ID() {
+        id=0;
+    }
+
+    public static ID getGeneratorId(){
+        if(generator==null) {
+            generator = new ID();
+        }
+        return generator;
+    }
+
+    public int getID(){
+        return id++;
+    }
 }

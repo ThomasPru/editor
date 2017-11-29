@@ -5,8 +5,8 @@ import java.util.Vector;
 public class Group extends GraphicsObject{
 
     public Group() {
+        super();
         m_objectList = new Vector<GraphicsObject>();
-        m_ID = ++ID.ID;
     }
 
     @Override
@@ -131,6 +131,7 @@ public class Group extends GraphicsObject{
         }
         return size;
     }
+
 
     private int countSimpleObject(){
         int countObjSimple = 0;
