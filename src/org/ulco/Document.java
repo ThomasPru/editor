@@ -1,9 +1,9 @@
 package org.ulco;
 
-import java.util.Iterator;
 import java.util.Vector;
 
 public class Document {
+    private Vector<Layer> m_layers;
     public Document() {
         m_layers = new Vector<Layer>();
     }
@@ -37,6 +37,10 @@ public class Document {
         for (int index = 0; index < number; ++index) {
             layer.add(new Circle(center, radius + index * delta));
         }
+    }
+
+    public Vector<Layer> getObjectList(){
+        return m_layers;
     }
 
     public Layer createLayer() {
@@ -103,15 +107,6 @@ public class Document {
         }
     }
 
-    public GraphicsObjects select(Point pt, double distance) {
-        GraphicsObjects list = new GraphicsObjects();
-
-        for (Layer layer : m_layers) {
-            list.addAll(layer.select(pt, distance));
-        }
-        return list;
-    }
-
     public String toJson() {
         String str = "{ type: document, layers: { ";
 
@@ -125,6 +120,4 @@ public class Document {
         }
         return str + " } }";
     }
-
-    private Vector<Layer> m_layers;
 }

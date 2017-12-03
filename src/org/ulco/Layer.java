@@ -23,6 +23,10 @@ public class Layer {
         parseObjects(str.substring(objectsIndex + 9, endIndex - 1));
     }
 
+    public Vector<GraphicsObject> getObjectList(){
+        return m_list;
+    }
+
     public void add(GraphicsObject o) {
         m_list.add(o);
     }
@@ -100,16 +104,6 @@ public class Layer {
         }
     }
 
-    public GraphicsObjects select(Point pt, double distance) {
-        GraphicsObjects list = new GraphicsObjects();
-
-        for (GraphicsObject object : m_list) {
-            if (object.isClosed(pt, distance)) {
-                list.add(object);
-            }
-        }
-        return list;
-    }
 
     public String toJson() {
         String str = "{ type: layer, objects : { ";
@@ -124,4 +118,6 @@ public class Layer {
         }
         return str + " } }";
     }
+
+
 }
